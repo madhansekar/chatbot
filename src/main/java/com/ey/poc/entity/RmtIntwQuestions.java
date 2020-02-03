@@ -22,15 +22,16 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @Table(name="RMT_INTW_QUESTIONS",schema="dbo")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id" ,scope =RmtIntwQuestions.class,resolver = DedupingObjectIdResolver.class )
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="question_id" ,scope =RmtIntwQuestions.class,resolver = DedupingObjectIdResolver.class )
 public class RmtIntwQuestions implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Long id;
+	private Long question_id;
 	private RmtCompetencySubTopics rmtCompetencySubTopics;
+	private RmtLevel level;
 	private String question;
 	private String choice1;
 	private String choice2;
@@ -75,17 +76,31 @@ public class RmtIntwQuestions implements java.io.Serializable {
 		this.updatedBy = updatedBy;
 		this.lastUpdatedTime = lastUpdatedTime;
 	}
+	
+	
 	@javax.persistence.Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")
-	public Long getId() {
-		return this.id;
+	public Long getQuestion_id() {
+		return question_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setQuestion_id(Long question_id) {
+		this.question_id = question_id;
 	}
-	@JsonBackReference
+
+	@JsonBackReference("questions")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="QLEVEL_ID")
+	public RmtLevel getLevel() {
+		return this.level;
+	}
+
+	public void setLevel(RmtLevel level) {
+		this.level = level;
+	}
+
+	@JsonBackReference("subtopic")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="SUB_TOPIC_ID")
 	public RmtCompetencySubTopics getRmtCompetencySubTopics() {
@@ -95,6 +110,8 @@ public class RmtIntwQuestions implements java.io.Serializable {
 	public void setRmtCompetencySubTopics(RmtCompetencySubTopics rmtCompetencySubTopics) {
 		this.rmtCompetencySubTopics = rmtCompetencySubTopics;
 	}
+	
+	
 	@Column(name="QUESTION")
 	public String getQuestion() {
 		return this.question;

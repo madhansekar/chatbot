@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -24,6 +26,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @Table(name="RMT_INTW_LEVEL",schema="dbo")
+
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="levelId",resolver = DedupingObjectIdResolver.class)
 public class RmtLevel implements java.io.Serializable {
 
@@ -34,8 +37,16 @@ public class RmtLevel implements java.io.Serializable {
 	private Long levelId;
 	private String Description;
 	private Set<RmtIntwUsers> rmtIntwUsers = new HashSet<RmtIntwUsers>();
+	private Set<RmtIntwQuestions>rmtIntwQuestions=new HashSet<RmtIntwQuestions>();
 
 	public RmtLevel() {
+	}
+	
+	
+	public RmtLevel(Long levelId) {
+		super();
+		this.levelId = levelId;
+		
 	}
 
 
@@ -67,7 +78,9 @@ public class RmtLevel implements java.io.Serializable {
 		Description = description;
 	}
 	
-	@JsonManagedReference @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL) @JoinColumn(name="LEVEL_ID" )
+	@JsonManagedReference("users")
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name="LEVEL_ID" )
 	public Set<RmtIntwUsers> getRmtIntwUsers() {
 		return rmtIntwUsers;
 	}
@@ -76,5 +89,17 @@ public class RmtLevel implements java.io.Serializable {
 	public void setRmtIntwUsers(Set<RmtIntwUsers> rmtIntwUsers) {
 		this.rmtIntwUsers = rmtIntwUsers;
 	}
+
+	
+	@JsonManagedReference("questions") @OneToMany(fetch = FetchType.LAZY) @JoinColumn(name="QLEVEL_ID" )
+	public Set<RmtIntwQuestions> getRmtIntwQuestions() {
+		return rmtIntwQuestions;
+	}
+
+
+	public void setRmtIntwQuestions(Set<RmtIntwQuestions> rmtIntwQuestions) {
+		this.rmtIntwQuestions = rmtIntwQuestions;
+	}
+	
 
 }

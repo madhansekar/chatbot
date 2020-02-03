@@ -90,7 +90,7 @@ public class RmtCompetencySubTopics implements java.io.Serializable {
 	public void setIsactive(Boolean isactive) {
 		this.isactive = isactive;
 	}
-	@JsonManagedReference @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true) @JoinColumn(name="SUB_TOPIC_ID" )
+	@JsonManagedReference("subtopic") @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true) @JoinColumn(name="SUB_TOPIC_ID" )
 	public Set<RmtIntwQuestions> getRmtIntwQuestionses() {
 		return this.rmtIntwQuestionses;
 	}

@@ -85,45 +85,4 @@ public class DataController {
 		
 	}
 	
-    @GetMapping("${spring.data.rest.basePath}/competencies")
-    public List<CompetencyVO> allCompetency() {
-
-        return compService.findAll();
-    }
-    @GetMapping("${spring.data.rest.basePath}/subCompetencies")
-    public List<SubCompetencyVO> allSubCompetency() {
-
-        return subCompService.findAll();
-    }
-
-    @GetMapping("${spring.data.rest.basePath}/topics")
-    public List<TopicsVO> allTopics() {
-
-        return topicService.findAll();
-    }
-    @GetMapping("${spring.data.rest.basePath}/subTopics")
-    public List<SubTopicsVO> allSubTopics() {
-
-        return subTopicService.findAll();
-    }
-    @GetMapping("${spring.data.rest.basePath}/subServiceLines")
-    public List<SubServiceLineVO> allSubServiceLines() {
-
-        return subServiceLineService.findAll();
-    }
-    @GetMapping("${spring.data.rest.basePath}/questions")
-    public List<RmtIntwQuestions> allQuestions() {
-
-        return questionService.findAll();
-    }
-    @GetMapping("${spring.data.rest.basePath}/levels")
-    public List<LevelVO> allLevels() {
-
-        return levelService.findAll();
-    }
-    @GetMapping("${spring.data.rest.basePath}/status")
-    public List<StatusVO> allStatus() {
-
-        return statusService.findAll();
-    }
-}
+   }

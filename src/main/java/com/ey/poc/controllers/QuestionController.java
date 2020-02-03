@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ey.poc.VO.QuestionsVO;
 import com.ey.poc.common.util.JsonResponseBody;
 import com.ey.poc.entity.RmtIntwQuestions;
 import com.ey.poc.services.QuestionsService;
@@ -54,9 +56,9 @@ public class QuestionController {
     
 	}
 	
-	@GetMapping("/{subtopic}")
-	public List<RmtIntwQuestions> get(@PathVariable Long subtopic){
-		return service.findByRmtCompetencySubTopicId(subtopic);
+	@GetMapping("/get")
+	public List<QuestionsVO> getQuestions(@RequestParam(name = "subtopicId") String subtopicId,@RequestParam(name = "levelId") String levelId){
+		return service.findByRmtCompetencySubTopicId(new Long(subtopicId),new Long(levelId));
 		
 	}
 

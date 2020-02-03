@@ -1,6 +1,7 @@
 package com.ey.poc.VO;
 
 import java.util.Date;
+import java.util.List;
 
 import com.ey.poc.entity.RmtIntwUsers;
 
@@ -14,6 +15,14 @@ public class UsersVO {
 	private Integer subCompetencyId;
 	private Long statusId;
 	private String statusDescription;
+	private List<QuestionsVO> questions;
+	
+	public List<QuestionsVO> getQuestions() {
+		return questions;
+	}
+	public void setQuestions(List<QuestionsVO> questions) {
+		this.questions = questions;
+	}
 	public Long getStatusId() {
 		return statusId;
 	}
@@ -158,7 +167,7 @@ public class UsersVO {
 	}
 	public UsersVO(RmtIntwUsers users) {
 		
-		this.id = users.getId();
+		this.id = users.getUser_Id();
 		this.subServicelineId = users.getRmtSubServiceline().getSubServicelineId();
 		this.subServicelineName = users.getRmtSubServiceline().getSubServicelineName();
 		this.competencyId = users.getRmtCompetency().getCompetencyId();

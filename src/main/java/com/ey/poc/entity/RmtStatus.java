@@ -60,6 +60,12 @@ public class RmtStatus implements java.io.Serializable {
 
 	
 	
+	public RmtStatus(Long statusId) {
+		super();
+		this.statusId = statusId;
+	}
+
+
 	@Column(name="DESCRIPTION")
 	public String getDescription() {
 		return Description;
@@ -71,7 +77,7 @@ public class RmtStatus implements java.io.Serializable {
 		Description = description;
 	}
 	
-	@JsonManagedReference @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL) @JoinColumn(name="STATUS_ID" )
+	@JsonManagedReference("user-status") @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL) @JoinColumn(name="STATUS_ID" )
 	public Set<RmtIntwUsers> getRmtIntwUsers() {
 		return rmtIntwUsers;
 	}

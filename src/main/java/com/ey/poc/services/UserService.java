@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ey.poc.VO.UsersVO;
+import com.ey.poc.entity.RmtIntwQuestions;
 import com.ey.poc.entity.RmtIntwUsers;
 import com.ey.poc.repository.UsersRepository;
 @Service
@@ -29,5 +30,11 @@ public class UserService {
 		return userList;
 		
 	}
+	
+	public  RmtIntwUsers addUser(RmtIntwUsers user){
+        
+		
+		   return repo.save(user);
+	   }
 
 }

@@ -22,14 +22,14 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @Table(name="RMT_INTW_USERS",schema="dbo")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="Id" ,scope =RmtIntwUsers.class,resolver = DedupingObjectIdResolver.class )
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="user_Id" ,scope =RmtIntwUsers.class,resolver = DedupingObjectIdResolver.class )
 public class RmtIntwUsers implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Long Id;
+	private Long user_Id;
 	private RmtSubServiceline rmtSubServiceline;
 	private RmtCompetency rmtCompetency;
 	private RmtSubCompetency rmtSubCompetency;
@@ -38,7 +38,7 @@ public class RmtIntwUsers implements java.io.Serializable {
 	private RmtLevel rmtlevel;
 	private RmtStatus rmtStatus;
 	
-	@JsonBackReference
+	@JsonBackReference("user-status")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="STATUS_ID")
 	public RmtStatus getRmtStatus() {
@@ -62,10 +62,9 @@ public class RmtIntwUsers implements java.io.Serializable {
 	
 
 
-	@JsonBackReference
+	@JsonBackReference(value="users") 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="LEVEL_ID")
-	
 	public RmtLevel getRmtlevel() {
 		return rmtlevel;
 	}
@@ -121,23 +120,12 @@ public class RmtIntwUsers implements java.io.Serializable {
 
 	
 
-	@javax.persistence.Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID")
-	public Long getId() {
-		return Id;
-	}
-
-
-
-	public void setId(Long id) {
-		Id = id;
-	}
 	
 	
 	
 	
-	@JsonBackReference
+	
+	@JsonBackReference("subtopic")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="SUB_TOPIC_ID")
 	public RmtCompetencySubTopics getRmtCompetencySubTopics() {
@@ -153,8 +141,22 @@ public class RmtIntwUsers implements java.io.Serializable {
 	}
 
 
+	@javax.persistence.Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID")
+	public Long getUser_Id() {
+		return user_Id;
+	}
 
-	@JsonBackReference
+
+
+	public void setUser_Id(Long user_Id) {
+		this.user_Id = user_Id;
+	}
+
+
+
+	@JsonBackReference("serviceline")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="SUB_SERVICELINE_ID")
 	public RmtSubServiceline getRmtSubServiceline() {
@@ -170,7 +172,7 @@ public class RmtIntwUsers implements java.io.Serializable {
 
 
 
-	@JsonBackReference
+	@JsonBackReference("competency")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="COMPETENCY_ID")
 	public RmtCompetency getRmtCompetency() {
@@ -186,7 +188,7 @@ public class RmtIntwUsers implements java.io.Serializable {
 
 
 
-	@JsonBackReference
+	@JsonBackReference("subCompetency")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="SUB_COMPETENCY_ID")
 	public RmtSubCompetency getRmtSubCompetency() {
@@ -202,7 +204,7 @@ public class RmtIntwUsers implements java.io.Serializable {
 
 
 
-	@JsonBackReference
+	@JsonBackReference("topicid")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="TOPIC_ID")
 	public RmtCompetencyTopics getRmtCompeteTopics() {

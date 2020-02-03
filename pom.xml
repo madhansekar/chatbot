@@ -38,7 +38,27 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+		<dependency>
+      <groupId>com.microsoft.bot.connector</groupId>
+      <artifactId>bot-connector</artifactId>
+      <version>4.0.0-a1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.bot.schema</groupId>
+      <artifactId>botbuilder-schema</artifactId>
+      <version>4.0.0-a1</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.jazzy</groupId>
+      <artifactId>jazzy</artifactId>
+      <version>0.5.2-rtext-1.4.1-2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.sf.jazzy</groupId>
+      <artifactId>jazzy-core</artifactId>
+      <version>0.5.2</version>
+    </dependency>
 		
 	</dependencies>
 
